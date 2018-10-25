@@ -14,10 +14,9 @@ def main():
 
 def test_touch_sensor():
     robot = rb.Snatch3rRobot()
-    sensor = rb.TouchSensor(robot.touch_sensor)
     robot.drive_system.start_moving(25, 25)
     while True:
-        if sensor.wait_until_pressed() is True:
+        if robot.touch_sensor.wait_until_pressed() is True:
             robot.drive_system.stop_moving()
             break
 
