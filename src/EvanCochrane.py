@@ -20,13 +20,19 @@ def test_go_straight_inches_method():
     my_robot = rb.Snatch3rRobot()
 
     print('Test 1: Forward 5 Inches')
-    my_robot.drive_system.go_straight_inches(5, 100)
+    my_robot.drive_system.go_straight_inches(5, 50)
 
-    print('Test 1: Forward 5 Inches')
-    my_robot.drive_system.go_straight_inches(5, 100)
+    print('Test 2: Backward 5 Inches')
+    my_robot.drive_system.go_straight_inches(-5, -50)
 
-    print('Test 1: Forward 5 Inches')
-    my_robot.drive_system.go_straight_inches(5, 100)
+    print('Test 3: Forward 0.5 Inches')
+    my_robot.drive_system.go_straight_inches(0.5, 5)
+
+    print('Test 4: Forward 0 Inches')
+    my_robot.drive_system.go_straight_inches(0, 100)
+
+    print('Test 5: Forward 60 Inches')
+    my_robot.drive_system.go_straight_inches(60, 100)
 
 
 def test_movement(robot, duty_cycle_percent, seconds):

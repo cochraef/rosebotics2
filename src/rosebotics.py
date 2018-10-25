@@ -113,7 +113,7 @@ class DriveSystem(object):
         starting_angle = self.right_wheel.get_degrees_spun()  # The right wheel appears to be more accurate
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
-            if angle_moved >= 88.07 * inches:  # From Test Data - Linear Regression
+            if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
                 self.stop_moving()
                 break
 
