@@ -11,14 +11,7 @@ def main():
     """ Runs YOUR specific part of the project """
 
     print('why not?')
-
-
-main()
-
-
-
-
-my_robot = rb.Snatch3rRobot()
+    all_movement_tests()
 
 
 def test_movement(robot, duty_cycle_percent, seconds):
@@ -32,11 +25,13 @@ def test_movement(robot, duty_cycle_percent, seconds):
     print('Degrees spun in right wheel, Degrees spun in left wheel:', x, y)
 
 
-test_movement(my_robot, 100, 3)
-# test_movement(my_robot, 50, 6)
-# test_movement(my_robot, 100, 1)
-# test_movement(my_robot, 25, 4)
-# test_movement(my_robot, 10, 10)
-# test_movement(my_robot, 50, 10)
-# test_movement(my_robot, -100, 1)
-# test_movement(my_robot, -20, 5)
+def all_movement_tests():
+    my_robot = rb.Snatch3rRobot()
+    duty = [100, 50, 100, 25, 10, 50, -100, -20]
+    seconds = [3, 6, 1, 4, 10, 10, 10, 1, 5]
+    for k in range(len(duty)):
+        test_movement(my_robot, duty[k], seconds[k])
+        time.sleep(30)
+
+
+main()
