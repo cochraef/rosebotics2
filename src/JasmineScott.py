@@ -5,7 +5,7 @@
 
 import rosebotics as rb
 import time
-
+robot = rb.Snatch3rRobot()
 
 def main():
     """ Runs YOUR specific part of the project """
@@ -13,8 +13,8 @@ def main():
 
 
 def run_test_for_wait_until_intensity_is_less_than():
-    rb.DriveSystem.start_moving(left_wheel_duty_cycle_percent=100, right_wheel_duty_cycle_percent=100)
-    rb.ColorSensor.wait_until_intensity_is_less_than()
+    robot.drive_system.start_moving(50, 50)
+    robot.color_sensor.wait_until_intensity_is_less_than(30)
 
 
 main()
