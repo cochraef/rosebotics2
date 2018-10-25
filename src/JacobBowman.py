@@ -9,6 +9,15 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
+    test_touch_sensor()
+
+
+def test_touch_sensor():
+    robot = rb.Snatch3rRobot()
+    sensor = rb.TouchSensor(robot.touch_sensor)
+    robot.drive_system.start_moving(25, 25)
+    if sensor.wait_until_pressed() is True:
+        robot.drive_system.stop_moving()
 
 
 main()
