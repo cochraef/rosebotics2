@@ -252,7 +252,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         # TO-DO
         while True:
             if self.get_color() == colors:
-                break
+                break 
 
 
 class InfraredSensorAsProximitySensor(object):
