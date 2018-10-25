@@ -110,8 +110,10 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
 
         self.start_moving(duty_cycle_percent, duty_cycle_percent)
+        starting_angle = self.right_wheel.get_degrees_spun()  # The right wheel appears to be more accurate
         while True:
-            if self.right_wheel.get_degrees_spun() >= 88.07 * inches:  # From Test Data - Linear Regression
+            angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
+            if angle_moved >= 88.07 * inches:  # From Test Data - Linear Regression
                 self.stop_moving()
                 break
 
