@@ -111,7 +111,7 @@ class DriveSystem(object):
 
         self.start_moving(duty_cycle_percent, duty_cycle_percent)
         while True:
-            if self.right_wheel.get_degrees_spun() >= 10*inches:
+            if self.right_wheel.get_degrees_spun() >= 88.07 * inches:  # From Test Data - Linear Regression
                 self.stop_moving()
                 break
 
