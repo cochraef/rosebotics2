@@ -216,11 +216,11 @@ class TouchSensor(low_level_rb.TouchSensor):
 
 
 class Camera(object):
-    """ Primary author of this class:  Jasmine Scott. """
+    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
 
 
 class ColorSensor(low_level_rb.ColorSensor):
-    """ Primary author of this class: Jasmine Scott. """
+    """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
 
     def __init__(self, port=ev3.INPUT_3):
         super().__init__(port)
@@ -231,10 +231,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
-        # COMPLETED
-        while True:
-            if self.get_reflected_intensity() < reflected_light_intensity:
-                break
+        # TODO.
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -242,10 +239,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
-        # COMPLETED
-        while True:
-            if self.get_reflected_intensity() > reflected_light_intensity:
-                break
+        # TODO.
 
     def wait_until_color_is(self, color):
         """
@@ -253,10 +247,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-        # COMPLETED
-        while True:
-            if self.get_color() == color:
-                break
+        # TODO.
 
     def wait_until_color_is_one_of(self, colors):
         """
@@ -264,10 +255,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TO-DO
-        while True:
-            if self.get_color() == colors:
-                break
+        # TODO.
 
 
 class InfraredSensorAsProximitySensor(object):
