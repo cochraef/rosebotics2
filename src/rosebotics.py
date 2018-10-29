@@ -156,7 +156,7 @@ class DriveSystem(object):
         # DONE   from wheel-degrees-spun to robot-degrees-turned.
         # DONE   Assume that the conversion is linear with respect to speed.
 
-        if degrees <= 0:
+        if degrees >= 0:
             self.start_moving(0, duty_cycle_percent)
 
             starting_angle = self.right_wheel.get_degrees_spun()
