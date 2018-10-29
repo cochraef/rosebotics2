@@ -22,17 +22,27 @@ def test_go_straight_inches_method():
     print('Test 1: Forward 5 Inches')
     my_robot.drive_system.go_straight_inches(5, 50)
 
+    time.sleep(10)
+
     print('Test 2: Backward 5 Inches')
     my_robot.drive_system.go_straight_inches(-5, -50)
 
+    time.sleep(10)
+
     print('Test 3: Forward 0.5 Inches')
-    my_robot.drive_system.go_straight_inches(0.5, 5)
+    my_robot.drive_system.go_straight_inches(0.5, 20)
+
+    time.sleep(10)
 
     print('Test 4: Forward 0 Inches')
     my_robot.drive_system.go_straight_inches(0, 100)
 
+    time.sleep(10)
+
     print('Test 5: Forward 60 Inches')
     my_robot.drive_system.go_straight_inches(60, 100)
+
+    time.sleep(10)
 
 
 def test_movement(robot, duty_cycle_percent, seconds):
