@@ -152,16 +152,19 @@ class DriveSystem(object):
         where positive is clockwise and negative is counter-clockwise),
         stopping by using the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-degrees-turned.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # DONE Do a few experiments to determine the constant that converts
+        # DONE   from wheel-degrees-spun to robot-degrees-turned.
+        # DONE   Assume that the conversion is linear with respect to speed.
 
-        self.start_moving(0, -duty_cycle_percent)
+        if degrees <= 0:
+            self.start_moving(duty_cycle_percent, 0)
+        else:
+            self.start_moving(0, duty_cycle_percent)
         starting_angle = self.right_wheel.get_degrees_spun()
 
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
-            if abs(angle_moved) >= 10 * abs(degrees):  # From Guess-and-Check
+            if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
                 self.stop_moving(stop_action)
                 break
 
