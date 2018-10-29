@@ -11,9 +11,8 @@ def main():
     """ Runs YOUR specific part of the project """
 
     print('why not?')
-    # all_movement_tests()
     test_go_straight_inches_method()
-    test_rotation(5, 25, 1)
+    test_spin_in_place_degrees_method()
 
 
 def test_go_straight_inches_method():
@@ -46,6 +45,36 @@ def test_go_straight_inches_method():
     time.sleep(10)
 
 
+def test_spin_in_place_degrees_method():
+    """ Tests the spin_in_place_degrees method """
+    my_robot = rb.Snatch3rRobot()
+
+    print('Test 1: Clockwise 90 Degrees')
+    my_robot.drive_system.spin_in_place_degrees(90, 100)
+
+    time.sleep(10)
+
+    print('Test 2: Counter 90 Degrees')
+    my_robot.drive_system.spin_in_place_degrees(-90, -100)
+
+    time.sleep(10)
+
+    print('Test 3: Clockwise 360 Degrees')
+    my_robot.drive_system.spin_in_place_degrees(360, 40)
+
+    time.sleep(10)
+
+    print('Test 4: Clockwise 0 Degrees')
+    my_robot.drive_system.spin_in_place_degrees(0, 50)
+
+    time.sleep(10)
+
+    print('Test 5: Counter 720 Degrees')
+    my_robot.drive_system.spin_in_place_degrees(-720, -100)
+
+    time.sleep(10)
+
+
 def test_movement(robot, duty_cycle_percent, seconds):
     """ DEPRECATED - USED TO CALCULATE LINEAR REGRESSION """
 
@@ -70,9 +99,10 @@ def all_movement_tests():
 
 
 def test_rotation(bottom, top, n):
-    """Guess and check for rotate in place"""
+    """DEPRECATED - USED TO GUESS-AND-CHECK"""
     robot = rb.Snatch3rRobot()
-    for k in range(bottom, top):
+    for k in range(bottom, round(top * n)):
+        print('Testing rotation with test value', k / n)
         robot.drive_system.spin_in_place_degrees(90, k / n)
         time.sleep(20)
 
