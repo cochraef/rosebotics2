@@ -105,22 +105,25 @@ class DriveSystem(object):
         Go straight at the given speed (-100 to 100, negative is backwards)
         for the given number of inches, stopping with the given StopAction.
         """
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-degrees-spun to robot-inches-moved.
-        # TODO:   Assume that the conversion is linear with respect to speed.
+        # DONE: Do a few experiments to determine the constant that converts
+        # DONE:   from wheel-degrees-spun to robot-inches-moved.
+        # DONE:   Assume that the conversion is linear with respect to speed.
 
         self.start_moving(duty_cycle_percent, duty_cycle_percent)
         starting_angle = self.right_wheel.get_degrees_spun()  # The right wheel appears to be more accurate
+
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
-                self.stop_moving()
+                self.stop_moving(stop_action)
                 break
 
     def spin_in_place_degrees(self,
                               degrees,
+                              test_value_pls_remove,
                               duty_cycle_percent=100,
-                              stop_action=StopAction.BRAKE):
+                              stop_action=StopAction.BRAKE,
+                              ):
         """
         Spin in place (i.e., both wheels move, in opposite directions)
         the given number of degrees, at the given speed (-100 to 100,
@@ -130,6 +133,15 @@ class DriveSystem(object):
         # TODO: Do a few experiments to determine the constant that converts
         # TODO:   from wheel-degrees-spun to robot-degrees-spun.
         # TODO:   Assume that the conversion is linear with respect to speed.
+
+        self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+        starting_angle = self.right_wheel.get_degrees_spun()
+
+        while True:
+            angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
+            if abs(angle_moved) >= test_value_pls_remove * abs(degrees):  # From Guess-and-Check
+                self.stop_moving(stop_action)
+                break
 
     def turn_degrees(self,
                      degrees,
