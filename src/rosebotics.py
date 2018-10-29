@@ -120,7 +120,6 @@ class DriveSystem(object):
 
     def spin_in_place_degrees(self,
                               degrees,
-                              test_value_pls_remove,
                               duty_cycle_percent=100,
                               stop_action=StopAction.BRAKE,
                               ):
@@ -139,7 +138,7 @@ class DriveSystem(object):
 
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
-            if abs(angle_moved) >= test_value_pls_remove * abs(degrees):  # From Guess-and-Check
+            if abs(angle_moved) >= 5.1 * abs(degrees):  # From Guess-and-Check
                 self.stop_moving(stop_action)
                 break
 
