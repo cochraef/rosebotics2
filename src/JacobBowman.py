@@ -1,5 +1,5 @@
 """
-  Capstone Project.  Code written by PUT_YOUR_NAME_HERE.
+  Capstone Project.  Code written by Jacob Bowman.
   Fall term, 2018-2019.
 """
 
@@ -9,7 +9,7 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
-    test_touch_sensor()
+    #test_touch_sensor()
 
 
 def test_touch_sensor():
@@ -20,5 +20,8 @@ def test_touch_sensor():
             robot.drive_system.stop_moving()
             break
 
+
+def find_color(color_value):
+    a = 0
 
 main()
