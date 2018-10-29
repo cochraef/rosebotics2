@@ -8,7 +8,6 @@
 import rosebotics as rb
 import time
 
-
 def main():
     """ Runs tests. """
     run_tests()
@@ -16,8 +15,8 @@ def main():
 
 def run_tests():
     """ Runs various tests. """
-    # run_test_drive_system()
-    run_test_touch_sensor()
+    run_test_drive_system()
+    # run_test_touch_sensor()
     # run_test_color_sensor()
 
 
