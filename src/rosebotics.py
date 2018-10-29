@@ -244,6 +244,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         while True:
             if self.get_reflected_intensity() < reflected_light_intensity:
                 break
+        return True
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -255,6 +256,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         while True:
             if self.get_reflected_intensity() > reflected_light_intensity:
                 break
+        return True
 
     def wait_until_color_is(self, color):
         """
@@ -266,6 +268,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         while True:
             if self.get_color() == color:
                 break
+        return True
 
     def wait_until_color_is_one_of(self, colors):
         """
@@ -277,6 +280,8 @@ class ColorSensor(low_level_rb.ColorSensor):
         while True:
             if self.get_color() == colors:
                 break
+        return True
+
 
 class InfraredSensorAsProximitySensor(object):
     """ Primary author of this class:  PUT_YOUR_NAME_HERE. """
