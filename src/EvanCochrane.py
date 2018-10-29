@@ -13,6 +13,7 @@ def main():
     print('why not?')
     # all_movement_tests()
     test_go_straight_inches_method()
+    test_rotation(5, 25, 1)
 
 
 def test_go_straight_inches_method():
@@ -49,7 +50,7 @@ def test_movement(robot, duty_cycle_percent, seconds):
     """ DEPRECATED - USED TO CALCULATE LINEAR REGRESSION """
 
     robot.drive_system.right_wheel.reset_degrees_spun()
-    robot.drive_system.right_wheel.reset_degrees_spun()
+    robot.drive_system.left_wheel.reset_degrees_spun()
     robot.drive_system.start_moving(duty_cycle_percent, duty_cycle_percent)
     time.sleep(seconds)
     robot.drive_system.stop_moving()
@@ -66,6 +67,14 @@ def all_movement_tests():
     for k in range(len(duty)):
         test_movement(my_robot, duty[k], seconds[k])
         time.sleep(30)
+
+
+def test_rotation(bottom, top, n):
+    """Guess and check for rotate in place"""
+    robot = rb.Snatch3rRobot()
+    for k in range(bottom, top):
+        robot.drive_system.spin_in_place_degrees(90, k / n)
+        time.sleep(20)
 
 
 main()
