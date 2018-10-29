@@ -9,7 +9,7 @@ import time
 
 def main():
     """ Runs YOUR specific part of the project """
-    #test_touch_sensor()
+    test_touch_sensor()
 
 
 def test_touch_sensor():
@@ -23,5 +23,6 @@ def test_touch_sensor():
 
 def find_color(color_value):
     a = 0
+
 
 main()
