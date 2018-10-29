@@ -12,7 +12,7 @@ def main():
 
     print('why not?')
     # test_go_straight_inches_method()
-    test_spin_in_place_degrees_method()
+    # test_spin_in_place_degrees_method()
     test_turn_degrees_method()
     test_move_in_polygon_function()
 
@@ -27,7 +27,7 @@ def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
     """
     for _ in range(n):
         robot.drive_system.go_straight_inches(length_of_each_side, speed)
-        robot.drive_system.spin_in_place_degrees(180 - (360 / n), speed)
+        robot.drive_system.spin_in_place_degrees((360 / n), speed)
 
 
 def test_go_straight_inches_method():
