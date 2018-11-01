@@ -16,7 +16,7 @@ def main():
     # run_test_for_wait_until_intensity_is_greater_than()
     # run_test_for_wait_until_color_is()
     # run_test_for_wait_until_color_is_one_of()
-    # run_test_for_get_biggest_blob()
+    run_test_for_beeping_based_camera()
 
 
 def run_test_for_wait_until_intensity_is_less_than():
