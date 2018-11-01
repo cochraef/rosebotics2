@@ -216,6 +216,14 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
+        self.start_moving(duty_cycle_percent, duty_cycle_percent)
+        starting_angle = self.right_wheel.get_degrees_spun()  # The right wheel appears to be more accurate
+
+        while True:
+            angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
+            if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
+                self.stop_moving(stop_action)
+                break
 
     def spin_in_place_degrees(self,
                               degrees,
@@ -236,6 +244,15 @@ class DriveSystem(object):
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
 
+        self.start_moving(duty_cycle_percent, -duty_cycle_percent)
+        starting_angle = self.right_wheel.get_degrees_spun()
+
+        while True:
+            angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
+            if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
+                self.stop_moving(stop_action)
+                break
+
     def turn_degrees(self,
                      degrees,
                      duty_cycle_percent=100,
@@ -254,6 +271,24 @@ class DriveSystem(object):
         # TODO:   Assume that the conversion is linear with respect to speed.
         # TODO: Don't forget that the Wheel object's position begins wherever
         # TODO:   it last was, not necessarily 0.
+        if degrees >= 0:
+            self.start_moving(0, duty_cycle_percent)
+
+            starting_angle = self.right_wheel.get_degrees_spun()
+
+            while True:
+                angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
+                if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
+                    self.stop_moving(stop_action)
+                    break
+        else:
+            self.start_moving(duty_cycle_percent, 0)
+            starting_angle = self.left_wheel.get_degrees_spun()
+            while True:
+                angle_moved = self.left_wheel.get_degrees_spun() - starting_angle
+                if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
+                    self.stop_moving(stop_action)
+                    break
 
 
 class TouchSensor(low_level_rb.TouchSensor):
@@ -273,10 +308,18 @@ class TouchSensor(low_level_rb.TouchSensor):
     def wait_until_pressed(self):
         """ Waits (doing nothing new) until the touch sensor is pressed. """
         # TODO.
+        while True:
+            if self.get_value() == 1:
+                break
+        return True
 
     def wait_until_released(self):
         """ Waits (doing nothing new) until the touch sensor is released. """
         # TODO
+        while True:
+            if self.get_value() == 0:
+                break
+        return True
 
 
 class ColorSensor(low_level_rb.ColorSensor):
@@ -288,7 +331,6 @@ class ColorSensor(low_level_rb.ColorSensor):
 
     def __init__(self, port=ev3.INPUT_3):
         super().__init__(port)
-
 
     def get_color(self):
         """
@@ -333,6 +375,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
         # TODO.
+        while True:
+            if self.get_reflected_intensity() < reflected_light_intensity:
+                break
+        return True
 
     def wait_until_intensity_is_greater_than(self, reflected_light_intensity):
         """
@@ -341,6 +387,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
         # TODO.
+        while True:
+            if self.get_reflected_intensity() > reflected_light_intensity:
+                break
+        return True
 
     def wait_until_color_is(self, color):
         """
@@ -349,6 +399,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         The given color must be a Color (as defined above).
         """
         # TODO.
+        while True:
+            if self.get_color() == color:
+                break
+        return True
 
     def wait_until_color_is_one_of(self, colors):
         """
@@ -357,6 +411,10 @@ class ColorSensor(low_level_rb.ColorSensor):
         Each item in the sequence must be a Color (as defined above).
         """
         # TODO.
+        while True:
+            if self.get_color() == colors:
+                break
+        return True
 
 
 class Camera(object):
