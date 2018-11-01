@@ -141,6 +141,17 @@ class Snatch3rRobot(object):
 
         self.drive_system = DriveSystem(left_wheel_port, right_wheel_port)
         self.arm = ArmAndClaw(self.touch_sensor, arm_port)
+    
+    def play(self, blocked=True):
+        """
+        Play the Beep.
+        If blocked is True, wait for the Beep to finish before continuing.
+          :type blocked: bool
+        """
+
+        subprocess = ev3.Sound.beep()
+        if blocked:
+            subprocess.wait()
 
 
 class DriveSystem(object):
@@ -784,23 +795,3 @@ class ArmAndClaw(object):
             if self.motor.get_degrees_spun() == position:
                 self.motor.stop_spinning()
                 break
-
-
-class Beep(object):
-    def __init__(self, blocked=True):
-        """
-        Store a "beep" Sound with the given arguments.
-        """
-        self.blocked = blocked
-
-    def play(self, blocked=None):
-        """
-        Play the Beep.
-        If blocked is True, wait for the Beep to finish before continuing.
-          :type blocked: bool
-        """
-        if blocked is None:
-            blocked = self.blocked
-        subprocess = ev3.Sound.beep()
-        if blocked:
-            subprocess.wait()
