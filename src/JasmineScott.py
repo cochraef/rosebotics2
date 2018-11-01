@@ -4,6 +4,8 @@
 """
 
 import rosebotics as rb
+import rosebotics_new as rb2
+import ev3dev.ev3 as ev3
 import time
 
 
@@ -112,7 +114,13 @@ def run_test_for_wait_until_color_is_one_of():
     robot.color_sensor.wait_until_color_is_one_of([1, 6, 3])
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
+
 def run_test_for_get_biggest_blob():
+    robot = rb2.Snatch3rRobot()
+    while True:
+        if robot.camera.set_signature():
+            ev3.Sound.beep().wait()
+        break
 
 
 main()
