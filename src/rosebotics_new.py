@@ -791,7 +791,7 @@ class ArmAndClaw(object):
 class Sound(object):
     def __init__(self):
         """
-        A class for playing sounds on the Brick.
+        A class for playing sounds on the robot.
         """
         self.blocked = None
 
