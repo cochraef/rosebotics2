@@ -3,7 +3,7 @@
   Fall term, 2018-2019.
 """
 
-import rosebotics as rb
+import rosebotics_new as rb
 import time
 
 
@@ -13,8 +13,9 @@ def main():
     print('why not?')
     # test_go_straight_inches_method()
     # test_spin_in_place_degrees_method()
-    test_turn_degrees_method()
-    test_move_in_polygon_function()
+    # test_turn_degrees_method()
+    # test_move_in_polygon_function()
+    infrared_tester(9, 12)
 
 
 def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
@@ -148,6 +149,22 @@ def test_move_in_polygon_function():
     move_in_polygon(my_robot, 100, 0.1)
 
     time.sleep(10)
+
+
+def infrared_tester(low, high):
+    """Causes the robot to beep when an object is placed between the lower bound and upper bound of the function.
+
+        :type low: float
+        :type high: float
+    """
+    my_robot = rb.Snatch3rRobot()
+    while True:
+        dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+        if low <= dist <= high:
+            beep = rb.Beep()
+            beep.play()
+        if my_robot.touch_sensor.is_pressed():
+            break
 
 
 def test_movement(robot, duty_cycle_percent, seconds):

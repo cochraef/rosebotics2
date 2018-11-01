@@ -759,3 +759,23 @@ class ArmAndClaw(object):
         Move at a reasonable speed.
         """
         # TODO: Do this as STEP 3 of implementing this class.
+
+
+class Beep(object):
+    def __init__(self, blocked=True):
+        """
+        Store a "beep" Sound with the given arguments.
+        """
+        self.blocked = blocked
+
+    def play(self, blocked=None):
+        """
+        Play the Beep.
+        If blocked is True, wait for the Beep to finish before continuing.
+          :type blocked: bool
+        """
+        if blocked is None:
+            blocked = self.blocked
+        subprocess = ev3.Sound.beep()
+        if blocked:
+            subprocess.wait()
