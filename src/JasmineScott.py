@@ -115,7 +115,7 @@ def run_test_for_wait_until_color_is_one_of():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
 
-def run_test_for_get_biggest_blob():
+def run_test_for_beeping_based_camera():
     robot = rb2.Snatch3rRobot()
     while True:
         if robot.camera.set_signature():
