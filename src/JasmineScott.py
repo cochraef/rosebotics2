@@ -13,7 +13,7 @@ def main():
     # run_test_for_wait_until_intensity_is_less_than()
     # run_test_for_wait_until_intensity_is_greater_than()
     # run_test_for_wait_until_color_is()
-    run_test_for_wait_until_color_is_one_of()
+    # run_test_for_wait_until_color_is_one_of()
 
 
 def run_test_for_wait_until_intensity_is_less_than():
@@ -45,14 +45,14 @@ def run_test_for_wait_until_intensity_is_greater_than():
     # Test 1
     robot = rb.Snatch3rRobot()
     """The robot should stop if the self intensity is greater than 30"""
-    robot.drive_system.start_moving(10, 10)
+    robot.drive_system.start_moving(20, 20)
     robot.color_sensor.wait_until_intensity_is_greater_than(30)
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
     # Test 2
     robot = rb.Snatch3rRobot()
     """The robot should stop if the self intensity is greater than 40"""
-    robot.drive_system.start_moving(10, 10)
+    robot.drive_system.start_moving(30, 30)
     robot.color_sensor.wait_until_intensity_is_greater_than(40)
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
