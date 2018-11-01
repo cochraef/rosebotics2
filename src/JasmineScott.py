@@ -14,6 +14,7 @@ def main():
     # run_test_for_wait_until_intensity_is_greater_than()
     # run_test_for_wait_until_color_is()
     # run_test_for_wait_until_color_is_one_of()
+    # run_test_for_get_biggest_blob()
 
 
 def run_test_for_wait_until_intensity_is_less_than():
@@ -110,6 +111,8 @@ def run_test_for_wait_until_color_is_one_of():
     robot.drive_system.start_moving(60, 60)
     robot.color_sensor.wait_until_color_is_one_of([1, 6, 3])
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
+
+def run_test_for_get_biggest_blob():
 
 
 main()
