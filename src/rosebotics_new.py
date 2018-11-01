@@ -742,14 +742,14 @@ class ArmAndClaw(object):
         again at a reasonable speed. Then set the motor's position to 0.
         (Hence, 0 means all the way DOWN and 14.2 * 360 means all the way UP).
         """
-        # TODO: Do this as STEP 2 of implementing this class.
+        # Done: Do this as STEP 2 of implementing this class.
         self.motor.start_spinning(100)
 
         while True:
             if self.touch_sensor.get_value() == 1:
                 self.motor.stop_spinning()
                 break
-        self.motor.reset_degrees_spun()
+        self.motor.reset_degrees_spun(0)
         self.motor.start_spinning(-100)
         while True:
             if self.motor.get_degrees_spun() >= 5112:
@@ -777,7 +777,13 @@ class ArmAndClaw(object):
         Spin the arm's motor until it reaches the given position.
         Move at a reasonable speed.
         """
-        # TODO: Do this as STEP 3 of implementing this class.
+        # Done: Do this as STEP 3 of implementing this class.
+        self.motor.start_spinning(100)
+
+        while True:
+            if self.motor.get_degrees_spun() == position:
+                self.motor.stop_spinning()
+                break
 
 
 class Beep(object):
