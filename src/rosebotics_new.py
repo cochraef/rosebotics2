@@ -147,10 +147,10 @@ class DriveSystem(object):
     """
     A class for driving (moving) the robot.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-       their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+       their colleagues, the entire team, and Evan Cochrane.
     """
 
-    # TODO: In the above line, put the name of the primary author of this class.
+    # Done: In the above line, put the name of the primary author of this class.
 
     def __init__(self,
                  left_wheel_port=ev3.OUTPUT_B,
@@ -210,19 +210,19 @@ class DriveSystem(object):
         at the given speed (-100 to 100, where negative means moving backward),
         stopping using the given StopAction (which defaults to BRAKE).
         """
-        # TODO: Use one of the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from wheel-DEGREES-spun to robot-INCHES-moved.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+        # Done: Use one of the Wheel object's   get_degrees_spun   method.
+        # Done: Do a few experiments to determine the constant that converts
+        # Done:   from wheel-DEGREES-spun to robot-INCHES-moved.
+        # Done:   Assume that the conversion is linear with respect to speed.
+        # Done: Don't forget that the Wheel object's position begins wherever
+        # Done:   it last was, not necessarily 0.
         self.start_moving(duty_cycle_percent, duty_cycle_percent)
         starting_angle = self.right_wheel.get_degrees_spun()  # The right wheel appears to be more accurate
 
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
-                self.stop_moving(stop_action)
+                self.stop_moving()
                 break
 
     def spin_in_place_degrees(self,
@@ -237,12 +237,12 @@ class DriveSystem(object):
         "Spinning in place" means that both wheels spin at the same speed
         but in opposite directions.
         """
-        # TODO: Use one of the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from WHEEL-degrees-spun to ROBOT-degrees-spun.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+        # Done: Use one of the Wheel object's   get_degrees_spun   method.
+        # Done: Do a few experiments to determine the constant that converts
+        # Done:   from WHEEL-degrees-spun to ROBOT-degrees-spun.
+        # Done:   Assume that the conversion is linear with respect to speed.
+        # Done: Don't forget that the Wheel object's position begins wherever
+        # Done:   it last was, not necessarily 0.
 
         self.start_moving(duty_cycle_percent, -duty_cycle_percent)
         starting_angle = self.right_wheel.get_degrees_spun()
@@ -250,7 +250,7 @@ class DriveSystem(object):
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
-                self.stop_moving(stop_action)
+                self.stop_moving()
                 break
 
     def turn_degrees(self,
@@ -265,12 +265,12 @@ class DriveSystem(object):
         "Turning" means that both ONE wheel spins at the given speed and the
         other wheel does NOT spin.
         """
-        # TODO: Use the Wheel object's   get_degrees_spun   method.
-        # TODO: Do a few experiments to determine the constant that converts
-        # TODO:   from WHEEL-degrees-SPUN to ROBOT-degrees-TURNED.
-        # TODO:   Assume that the conversion is linear with respect to speed.
-        # TODO: Don't forget that the Wheel object's position begins wherever
-        # TODO:   it last was, not necessarily 0.
+        # Done: Use the Wheel object's   get_degrees_spun   method.
+        # Done: Do a few experiments to determine the constant that converts
+        # Done:   from WHEEL-degrees-SPUN to ROBOT-degrees-TURNED.
+        # Done:   Assume that the conversion is linear with respect to speed.
+        # Done: Don't forget that the Wheel object's position begins wherever
+        # Done:   it last was, not necessarily 0.
         if degrees >= 0:
             self.start_moving(0, duty_cycle_percent)
 
@@ -279,7 +279,7 @@ class DriveSystem(object):
             while True:
                 angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving(stop_action)
+                    self.stop_moving()
                     break
         else:
             self.start_moving(duty_cycle_percent, 0)
@@ -287,7 +287,7 @@ class DriveSystem(object):
             while True:
                 angle_moved = self.left_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving(stop_action)
+                    self.stop_moving()
                     break
 
 
@@ -295,7 +295,7 @@ class TouchSensor(low_level_rb.TouchSensor):
     """
     A class for an EV3 touch sensor.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-       their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+       their colleagues, the entire team, and Jacob Bowman.
     """
 
     def __init__(self, port=ev3.INPUT_1):
@@ -307,7 +307,7 @@ class TouchSensor(low_level_rb.TouchSensor):
 
     def wait_until_pressed(self):
         """ Waits (doing nothing new) until the touch sensor is pressed. """
-        # TODO.
+        # Done.
         while True:
             if self.get_value() == 1:
                 break
@@ -315,7 +315,7 @@ class TouchSensor(low_level_rb.TouchSensor):
 
     def wait_until_released(self):
         """ Waits (doing nothing new) until the touch sensor is released. """
-        # TODO
+        # Done
         while True:
             if self.get_value() == 0:
                 break
@@ -326,7 +326,7 @@ class ColorSensor(low_level_rb.ColorSensor):
     """
     A class for an EV3 color sensor.
     Primary authors:  The ev3dev authors, David Mutchler, Dave Fisher,
-       their colleagues, the entire team, and PUT_YOUR_NAME_HERE.
+       their colleagues, the entire team, and Jasmine Scott.
     """
 
     def __init__(self, port=ev3.INPUT_3):
@@ -374,7 +374,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is less than the given value (threshold), which should
         be between 0 (no light reflected) and 100 (maximum light reflected).
         """
-        # TODO.
+        # Done.
         while True:
             if self.get_reflected_intensity() < reflected_light_intensity:
                 break
@@ -386,7 +386,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         light intensity is greater than the given value (threshold), which
         should be between 0 (no light reflected) and 100 (max light reflected).
         """
-        # TODO.
+        # Done.
         while True:
             if self.get_reflected_intensity() > reflected_light_intensity:
                 break
@@ -398,7 +398,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is the given color.
         The given color must be a Color (as defined above).
         """
-        # TODO.
+        # Done.
         while True:
             if self.get_color() == color:
                 break
@@ -410,7 +410,7 @@ class ColorSensor(low_level_rb.ColorSensor):
         of what color it sees is any one of the given sequence of colors.
         Each item in the sequence must be a Color (as defined above).
         """
-        # TODO.
+        # Done.
         while True:
             if self.get_color() == colors:
                 break
