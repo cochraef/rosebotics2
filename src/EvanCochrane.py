@@ -15,7 +15,7 @@ def main():
     # test_spin_in_place_degrees_method()
     # test_turn_degrees_method()
     # test_move_in_polygon_function()
-    infrared_tester(9, 12)
+    infrared_tester(9, 15)
 
 
 def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
@@ -161,7 +161,7 @@ def infrared_tester(low, high):
     while True:
         dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
         if low <= dist <= high:
-            beep = rb.Beep()
+            beep = rb.Beep(False)
             beep.play()
         if my_robot.touch_sensor.is_pressed():
             break
