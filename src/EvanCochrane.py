@@ -11,8 +11,23 @@ def main():
     """ Runs YOUR specific part of the project """
 
     print('why not?')
-    test_go_straight_inches_method()
-    test_spin_in_place_degrees_method()
+    # test_go_straight_inches_method()
+    # test_spin_in_place_degrees_method()
+    test_turn_degrees_method()
+    test_move_in_polygon_function()
+
+
+def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
+    """ Causes the given rb.Robot object to move in a regular n-gon pattern, with optional length and speed options.
+
+    :type robot: rb.Snatch3rRobot
+    :type n: int
+    :type length_of_each_side: float
+    :type speed: int
+    """
+    for _ in range(n):
+        robot.drive_system.go_straight_inches(length_of_each_side, speed)
+        robot.drive_system.spin_in_place_degrees((360 / n), speed)
 
 
 def test_go_straight_inches_method():
@@ -71,6 +86,66 @@ def test_spin_in_place_degrees_method():
 
     print('Test 5: Counter 720 Degrees')
     my_robot.drive_system.spin_in_place_degrees(-720, -100)
+
+    time.sleep(10)
+
+
+def test_turn_degrees_method():
+    """ Tests the spin_in_place_degrees method """
+    my_robot = rb.Snatch3rRobot()
+
+    print('Test 1: Clockwise 90 Degrees')
+    my_robot.drive_system.turn_degrees(90, 100)
+
+    time.sleep(10)
+
+    print('Test 2: Counter 90 Degrees')
+    my_robot.drive_system.turn_degrees(-90, -100)
+
+    time.sleep(10)
+
+    print('Test 3: Clockwise 360 Degrees')
+    my_robot.drive_system.turn_degrees(360, 40)
+
+    time.sleep(10)
+
+    print('Test 4: Clockwise 0 Degrees')
+    my_robot.drive_system.turn_degrees(0, 50)
+
+    time.sleep(10)
+
+    print('Test 5: Counter 720 Degrees')
+    my_robot.drive_system.turn_degrees(-720, -100)
+
+    time.sleep(10)
+
+
+def test_move_in_polygon_function():
+    """ Tests the move_in_polygon function. """
+    my_robot = rb.Snatch3rRobot()
+
+    print('Test 1: Octagon')
+    move_in_polygon(my_robot, 8)
+
+    time.sleep(10)
+
+    print('Test 2: Small Square')
+    move_in_polygon(my_robot, 4, 2)
+
+    time.sleep(10)
+
+    print('Test 3: Slow Triangle')
+    move_in_polygon(my_robot, 3, 10, 50)
+
+    time.sleep(10)
+
+    print('Test 4: Decagon')
+    move_in_polygon(my_robot, 10, 1)
+
+    time.sleep(10)
+
+    print('Test 5: OH GOD WHY')
+    move_in_polygon(my_robot, 100, 0.1)
 
     time.sleep(10)
 
