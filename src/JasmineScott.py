@@ -16,7 +16,8 @@ def main():
     # run_test_for_wait_until_intensity_is_greater_than()
     # run_test_for_wait_until_color_is()
     # run_test_for_wait_until_color_is_one_of()
-    run_test_for_beeping_based_camera()
+    # run_test_for_beeping_based_camera()
+    run_test_for_get_biggest_blob()
 
 
 def run_test_for_wait_until_intensity_is_less_than():
@@ -117,10 +118,14 @@ def run_test_for_wait_until_color_is_one_of():
 
 def run_test_for_beeping_based_camera():
     robot = rb2.Snatch3rRobot()
+    robot.camera.set_signature(robot.camera.low_level_camera)
     while True:
-        if robot.camera.set_signature():
-            ev3.Sound.beep().wait()
-        break
+            ev3.Sound.beep()
+
+
+def run_test_for_get_biggest_blob():
+    robot = rb2.Snatch3rRobot()
+    robot.camera.get_biggest_blob()
 
 
 main()
