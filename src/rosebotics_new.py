@@ -122,7 +122,8 @@ class Snatch3rRobot(object):
                  touch_sensor_port=ev3.INPUT_1,
                  camera_port=ev3.INPUT_2,
                  color_sensor_port=ev3.INPUT_3,
-                 ir_sensor_port=ev3.INPUT_4):
+                 ir_sensor_port=ev3.INPUT_4,
+                 ):
         """
         A  Snatch3rRobot  object has other objects as components:
         drive_system, touch_sensor, camera, color_sensor, etc.
@@ -141,17 +142,7 @@ class Snatch3rRobot(object):
 
         self.drive_system = DriveSystem(left_wheel_port, right_wheel_port)
         self.arm = ArmAndClaw(self.touch_sensor, arm_port)
-    
-    def play(self, blocked=True):
-        """
-        Play the Beep.
-        If blocked is True, wait for the Beep to finish before continuing.
-          :type blocked: bool
-        """
-
-        subprocess = ev3.Sound.beep()
-        if blocked:
-            subprocess.wait()
+        self.sound = Sound()
 
 
 class DriveSystem(object):
@@ -795,3 +786,24 @@ class ArmAndClaw(object):
             if self.motor.get_degrees_spun() == position:
                 self.motor.stop_spinning()
                 break
+
+
+class Sound(object):
+    def __init__(self):
+        """
+        A class for playing sounds on the Brick.
+        """
+        self.blocked = None
+
+    def play_beep(self, blocked=None):
+        """
+        Play the Beep.
+        If blocked is True, wait for the Beep to finish before continuing.
+          :type blocked: bool
+        """
+        if blocked is not None:
+            blocked = self.blocked
+        beep = ev3.Sound.beep()
+        beep.play()
+        if blocked:
+            beep.wait()

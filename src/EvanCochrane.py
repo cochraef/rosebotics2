@@ -161,7 +161,7 @@ def infrared_tester(low, high):
     while True:
         dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
         if low <= dist <= high:
-            my_robot.play(False)
+            my_robot.sound.play_beep(False)
         if my_robot.touch_sensor.is_pressed():
             break
 
