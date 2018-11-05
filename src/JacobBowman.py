@@ -3,7 +3,7 @@
   Fall term, 2018-2019.
 """
 
-import rosebotics as rb
+import rosebotics_new as rb
 import time
 
 
@@ -11,7 +11,8 @@ def main():
     """ Runs YOUR specific part of the project """
     # test_touch_sensor()
     # test_find_color(2)
-    test_black_line()
+    # test_black_line()
+    test_arm()
 
 
 def test_touch_sensor():
@@ -54,6 +55,12 @@ def test_find_color(color):
 
 def test_black_line():
     black_line()
+
+
+def test_arm():
+    robot = rb.Snatch3rRobot()
+    arm1 = rb.ArmAndClaw(robot.touch_sensor, robot)
+    arm1.raise_arm_and_close_claw()
 
 
 main()
