@@ -128,5 +128,9 @@ def run_test_for_beeping_based_camera():
             print("I SEE THE COLOR")
             ev3.Sound.beep()
 
+        if robot.touch_sensor.is_pressed():
+            print('COMPLETED')
+            break
+
 
 main()
