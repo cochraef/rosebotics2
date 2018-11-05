@@ -793,7 +793,6 @@ class Sound(object):
         """
         A class for playing sounds on the robot.
         """
-        self.blocked = None
 
     @staticmethod
     def play_beep():
