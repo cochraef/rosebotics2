@@ -223,7 +223,7 @@ class DriveSystem(object):
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
-                self.stop_moving()
+                self.stop_moving(stop_action.value)
                 break
 
     def spin_in_place_degrees(self,
@@ -251,7 +251,7 @@ class DriveSystem(object):
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
-                self.stop_moving()
+                self.stop_moving(stop_action.value)
                 break
 
     def turn_degrees(self,
@@ -280,7 +280,7 @@ class DriveSystem(object):
             while True:
                 angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving()
+                    self.stop_moving(stop_action.value)
                     break
         else:
             self.start_moving(duty_cycle_percent, 0)
