@@ -158,7 +158,7 @@ def infrared_tester(low, high):
         :type high: float
     """
     my_robot = rb.Snatch3rRobot()
-    my_robot.sound.time_after_play(0.5)
+    my_robot.sound.time_after_play(1.5)
     while True:
         dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
         if low <= dist <= high:

@@ -790,10 +790,18 @@ class Sound(object):
 
         self.time_after_play = 0
 
+        self.volume = 50
+        ev3.Sound.set_volume(self.volume)
+
     def set_wait_time(self, seconds):
         """ Sets the time waited after a sound plays, in seconds."""
 
         self.time_after_play = seconds
+
+    def set_volume(self, volume):
+
+        self.volume = volume
+        ev3.Sound.set_volume(self.volume)
 
     def play_beep(self):
         """
