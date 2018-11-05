@@ -549,7 +549,7 @@ class InfraredAsProximitySensor(low_level_rb.InfraredSensor):
         in inches, where about 39.37 inches (which is 100 cm) means no object
         is within its field of vision.
         """
-        inches_per_cm = 2.54
+        inches_per_cm = 1 / 2.54
         return 70 * inches_per_cm * self.get_distance_to_nearest_object() / 100
 
 
@@ -788,9 +788,25 @@ class Sound(object):
         A class for playing sounds on the robot.
         """
 
-    @staticmethod
-    def play_beep():
+        self.time_after_play = 0
+
+        self.volume = 50
+        ev3.Sound.set_volume(self.volume)
+
+    def set_wait_time(self, seconds):
+        """ Sets the time waited after a sound plays, in seconds."""
+
+        self.time_after_play = seconds
+
+    def set_volume(self, volume):
+
+        self.volume = volume
+        ev3.Sound.set_volume(self.volume)
+
+    def play_beep(self):
         """
         Plays a Beep.
         """
         ev3.Sound.beep()
+
+        time.sleep(self.time_after_play)
