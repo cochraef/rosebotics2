@@ -125,7 +125,7 @@ def run_test_for_beeping_based_camera():
 
         area = width * height
 
-        if  area > 1000:
+        if area > 1000:
             # print("I SEE THE COLOR")
             ev3.Sound.beep()
 
