@@ -151,14 +151,18 @@ def test_move_in_polygon_function():
     time.sleep(10)
 
 
-def infrared_tester(low, high):
-    """Causes the robot to beep when an object is placed between the lower bound and upper bound of the function.
+def infrared_tester(low, high, beep_volume=100):
+    """Causes the robot to beep with volume beep_volume between 0 and 100 when an object is placed between the lower bound
+    and upper bound of the function.
 
         :type low: float
         :type high: float
+        :type beep_volume: int
+
     """
     my_robot = rb.Snatch3rRobot()
-    my_robot.sound.time_after_play(1.5)
+    my_robot.sound.set_wait_time(1)
+    my_robot.sound.set_volume(beep_volume)
     while True:
         dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
         if low <= dist <= high:
