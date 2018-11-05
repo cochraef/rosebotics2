@@ -117,11 +117,10 @@ def run_test_for_wait_until_color_is_one_of():
 
 def run_test_for_beeping_based_camera():
     robot = rb2.Snatch3rRobot()
-    camera = robot.camera
 
     while True:
-        width = camera.get_biggest_blob().width
-        height = camera.get_biggest_blob().height
+        width = robot.camera.get_biggest_blob().width
+        height = robot.camera.get_biggest_blob().height
 
         area = width * height
 
