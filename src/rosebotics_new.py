@@ -795,15 +795,10 @@ class Sound(object):
         """
         self.blocked = None
 
-    def play_beep(self, blocked=None):
+    @staticmethod
+    def play_beep():
         """
-        Play the Beep.
-        If blocked is True, wait for the Beep to finish before continuing.
-          :type blocked: bool
+        Plays a Beep.
         """
-        if blocked is not None:
-            blocked = self.blocked
-        beep = ev3.Sound.beep()
-        beep.play()
-        if blocked:
-            beep.wait()
+        ev3.Sound.beep()
+
