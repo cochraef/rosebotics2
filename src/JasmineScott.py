@@ -131,5 +131,4 @@ def run_test_for_beeping_based_camera():
 
 
 
-
 main()
