@@ -117,15 +117,14 @@ def run_test_for_wait_until_color_is_one_of():
 
 def run_test_for_beeping_based_camera():
     robot = rb2.Snatch3rRobot()
-
     while True:
         width = robot.camera.get_biggest_blob().width
         height = robot.camera.get_biggest_blob().height
 
         area = width * height
 
-        if area > 500:
-            print("I SEE THE COLOR")
+        if area > 1000:
+            print("I SEE THE OBJECT")
             ev3.Sound.beep()
 
         if robot.touch_sensor.is_pressed():
