@@ -7,42 +7,6 @@ It uses MQTT to SEND information to a program running on the ROBOT.
 
 Authors:  David Mutchler, his colleagues, and Evan Cochrane.
 """
-# ------------------------------------------------------------------------------
-# TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this TODO.
-# ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-# TODO: 2. With your instructor, discuss the "big picture" of laptop-robot
-# TODO:    communication:
-# TODO:      - One program runs on your LAPTOP.  It displays a GUI.  When the
-# TODO:        user presses a button intended to make something happen on the
-# TODO:        ROBOT, the LAPTOP program sends a message to its MQTT client
-# TODO:        indicating what it wants the ROBOT to do, and the MQTT client
-# TODO:        SENDS that message TO a program running on the ROBOT.
-# TODO:
-# TODO:      - Another program runs on the ROBOT. It stays in a loop, responding
-# TODO:        to events on the ROBOT (like pressing buttons on the IR Beacon).
-# TODO:        It also, in the background, listens for messages TO the ROBOT
-# TODO:        FROM the program running on the LAPTOP.  When it hears such a
-# TODO:        message, it calls the method in the DELAGATE object's class
-# TODO:        that the message indicates, sending arguments per the message.
-# TODO:
-# TODO:  Once you understand the "big picture", delete this TODO (if you wish).
-# ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-# TODO: 3. One team member: change the following in mqtt_remote_method_calls.py:
-#                LEGO_NUMBER = 99
-# TODO:    to use YOUR robot's number instead of 99.
-# TODO:    Commit and push the change, then other team members Update Project.
-# TODO:    Then delete this TODO.
-# ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
-# TODO: 4. Run this module.
-# TODO:    Study its code until you understand how the GUI is set up.
-# TODO:    Then delete this TODO.
-# ------------------------------------------------------------------------------
 
 import tkinter
 from tkinter import ttk
@@ -51,18 +15,16 @@ import mqtt_remote_method_calls as com
 
 def main():
     """ Constructs and runs a GUI for this program. """
+    instructor = com.MqttClient()
+    instructor.connect_to_ev3()
+
     root = tkinter.Tk()
-    setup_gui(root)
+    setup_gui(root, instructor)
 
     root.mainloop()
-    # --------------------------------------------------------------------------
-    # TODO: 5. Add code above that constructs a   com.MqttClient   that will
-    # TODO:    be used to send commands to the robot.  Connect it to this pc.
-    # TODO:    Test.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
 
 
-def setup_gui(root_window):
+def setup_gui(root_window, mqtt_client):
     """ Constructs and sets up widgets on the given window. """
     frame = ttk.Frame(root_window, padding=10)
     frame.grid()
@@ -74,19 +36,17 @@ def setup_gui(root_window):
     go_forward_button.grid()
 
     go_forward_button['command'] = \
-        lambda: handle_go_forward()
+        lambda: handle_go_forward(speed_entry_box, mqtt_client)
 
 
-def handle_go_forward():
+def handle_go_forward(entry_box, instructor):
     """
     Tells the robot to go forward at the speed specified in the given entry box.
     """
-    # --------------------------------------------------------------------------
-    # TODO: 6. This function needs the entry box in which the user enters
-    # TODO:    the speed at which the robot should move.  Make the 2 changes
-    # TODO:    necessary for the entry_box constructed in  setup_gui
-    # TODO:    to make its way to this function.  When done, delete this TODO.
-    # --------------------------------------------------------------------------
+
+    speed_as_string = entry_box.get()
+    print("Sending the go_forward message with speed")
+    instructor.send_message("go_forward", [speed_as_string])
 
     # --------------------------------------------------------------------------
     # TODO: 7. For this function to tell the robot what to do, it needs
