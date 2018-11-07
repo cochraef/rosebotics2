@@ -814,7 +814,7 @@ class Sound(object):
         ev3.Sound.beep()
 
         if wait is True:
-            time.sleep(self.time_after_play)
+            time.sleep(self.time_after_play)   # Applies the wait time as long as not overridden by call
 
     def speak(self, phrase, wait=True):
         """
@@ -826,4 +826,19 @@ class Sound(object):
         ev3.Sound.speak(phrase)
 
         if wait is True:
-            time.sleep(self.time_after_play)
+            time.sleep(self.time_after_play)  # Applies the wait time as long as not overridden by call
+
+    def play_note(self, tone, play_time, wait=True):
+        """
+        Causes the robot to play a single note with a given frequency (in Hertz) and time to play the note
+        for(in milliseconds).
+
+        :type tone: int
+        :type play_time: int
+        :type wait: bool
+        """
+
+        ev3.Sound.tone([tone, play_time])
+
+        if wait is True:
+            time.sleep(self.time_after_play)  # Applies the wait time as long as not overridden by call
