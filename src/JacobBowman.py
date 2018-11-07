@@ -58,9 +58,8 @@ def test_black_line():
 
 
 def test_arm():
-    robot = rb.Snatch3rRobot()
-    arm1 = rb.ArmAndClaw(robot.touch_sensor, robot)
-    arm1.raise_arm_and_close_claw()
+    arm1 = rb.ArmAndClaw(rb.Snatch3rRobot)
+    arm1.calibrate()
 
 
 main()

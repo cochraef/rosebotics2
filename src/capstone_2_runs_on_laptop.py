@@ -5,7 +5,7 @@ Mini-application:  Buttons on a Tkinter GUI tell the robot to:
 This module runs on your LAPTOP.
 It uses MQTT to SEND information to a program running on the ROBOT.
 
-Authors:  David Mutchler, his colleagues, and PUT_YOUR_NAME_HERE.
+Authors:  David Mutchler, his colleagues, and Jacob Bowman.
 """
 # ------------------------------------------------------------------------------
 # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.  Then delete this TODO.
@@ -52,17 +52,15 @@ import mqtt_remote_method_calls as com
 def main():
     """ Constructs and runs a GUI for this program. """
     root = tkinter.Tk()
-    setup_gui(root)
 
+    sender = com.MqttClient()
+    sender.connect_to_ev3()
+
+    setup_gui(root, sender)
     root.mainloop()
-    # --------------------------------------------------------------------------
-    # TODO: 5. Add code above that constructs a   com.MqttClient   that will
-    # TODO:    be used to send commands to the robot.  Connect it to this pc.
-    # TODO:    Test.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
 
 
-def setup_gui(root_window):
+def setup_gui(root_window, sender):
     """ Constructs and sets up widgets on the given window. """
     frame = ttk.Frame(root_window, padding=10)
     frame.grid()
@@ -74,26 +72,16 @@ def setup_gui(root_window):
     go_forward_button.grid()
 
     go_forward_button['command'] = \
-        lambda: handle_go_forward()
+        lambda: handle_go_forward(speed_entry_box, sender)
 
 
-def handle_go_forward():
+def handle_go_forward(box, sender):
     """
     Tells the robot to go forward at the speed specified in the given entry box.
     """
-    # --------------------------------------------------------------------------
-    # TODO: 6. This function needs the entry box in which the user enters
-    # TODO:    the speed at which the robot should move.  Make the 2 changes
-    # TODO:    necessary for the entry_box constructed in  setup_gui
-    # TODO:    to make its way to this function.  When done, delete this TODO.
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # TODO: 7. For this function to tell the robot what to do, it needs
-    # TODO:    the MQTT client constructed in main.  Make the 4 changes
-    # TODO:    necessary for that object to make its way to this function.
-    # TODO:    When done, delete this TODO.
-    # --------------------------------------------------------------------------
+    speed_str = box.get()
+    print('Sending the go_forward message with speed', speed_str)
+    sender.send_message('go_forward', [speed_str])
 
     # --------------------------------------------------------------------------
     # TODO: 8. Add the single line of code needed to get the string that is
