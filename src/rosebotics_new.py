@@ -540,7 +540,7 @@ class InfraredAsProximitySensor(low_level_rb.InfraredSensor):
         distance to the nearest object is 70 * (N/100) cm.  For example:
            - numbers < 10 indicate that the object is less than 7 cm away
            - 20 means 1/5 of 70, i.e., 14 cm
-           - 40 means 2/5 of 70, i.e., 28 cm
+           - 40 means 2/5 of 70, i.e., 28 cm 
            - 50 means 1/2 of 70, i.e., 35 cm
            - greater than 70 is too far away to be useful
                (more precisely, greater than 49 cm away)
