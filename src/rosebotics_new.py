@@ -807,10 +807,23 @@ class Sound(object):
         self.volume = volume
         ev3.Sound.set_volume(self.volume)
 
-    def play_beep(self):
+    def play_beep(self, wait=True):
         """
         Plays a Beep.
         """
         ev3.Sound.beep()
 
-        time.sleep(self.time_after_play)
+        if wait is True:
+            time.sleep(self.time_after_play)
+
+    def speak(self, phrase, wait=True):
+        """
+        Causes the robot to say whatever phrase the function is called with.
+
+        :type phrase: str
+        :type wait: bool
+        """
+        ev3.Sound.speak(phrase)
+
+        if wait is True:
+            time.sleep(self.time_after_play)

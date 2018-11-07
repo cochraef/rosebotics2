@@ -13,7 +13,6 @@ Authors:  David Mutchler, his colleagues, and Evan Cochrane.
 import rosebotics_new as rb
 import time
 import mqtt_remote_method_calls as com
-import ev3dev.ev3 as ev3
 
 
 def main():
@@ -24,26 +23,22 @@ def main():
     receiver = com.MqttClient()
     receiver.connect_to_pc()
 
-    # --------------------------------------------------------------------------
-    # TODO: 5. Add a class for your "delegate" object that will handle messages
-    # TODO:    sent from the laptop.  Construct an instance of the class and
-    # TODO:    pass it to the MqttClient constructor above.  Augment the class
-    # TODO:    as needed for that, and also to handle the go_forward message.
-    # TODO:    Test by PRINTING, then with robot.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # TODO: 6. With your instructor, discuss why the following WHILE loop,
-    # TODO:    that appears to do nothing, is necessary.
-    # TODO:    When you understand this, delete this TODO.
-    # --------------------------------------------------------------------------
     while True:
-        # ----------------------------------------------------------------------
-        # TODO: 7. Add code that makes the robot beep if the top-red button
-        # TODO:    on the Beacon is pressed.  Add code that makes the robot
-        # TODO:    speak "Hello. How are you?" if the top-blue button on the
-        # TODO:    Beacon is pressed.  Test.  When done, delete this TODO.
-        # ----------------------------------------------------------------------
+
+        robot.sound.set_wait_time(1)
+
+        red_pressed = robot.beacon_button_sensor.is_top_red_button_pressed()
+        blue_pressed = robot.beacon_button_sensor.is_top_blue_button_pressed()
+
+        if red_pressed and blue_pressed:
+
+            robot.sound.play_beep()
+            robot.sound.speak("Hello. How are you?", False)
+        elif red_pressed and not blue_pressed:
+            robot.sound.play_beep()
+        elif blue_pressed and not red_pressed:
+            robot.sound.speak("Hello. How are you.")
+
         time.sleep(0.01)  # For the delegate to do its work
 
 
