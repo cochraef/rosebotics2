@@ -745,18 +745,16 @@ class ArmAndClaw(object):
         """
         # Done: Do this as STEP 2 of implementing this class.
         self.motor.start_spinning(100)
-
         while True:
             if self.touch_sensor.get_value() == 1:
-                self.motor.stop_spinning()
                 break
-        self.motor.reset_degrees_spun(0)
+        self.motor.stop_spinning()
+        self.motor.reset_degrees_spun()
         self.motor.start_spinning(-100)
         while True:
-            if self.motor.get_degrees_spun() >= 5112:
+            if self.motor.get_degrees_spun() <= -5112:
                 self.motor.stop_spinning()
                 break
-        self.calibrate()
 
     def raise_arm_and_close_claw(self):
         """
@@ -779,6 +777,7 @@ class ArmAndClaw(object):
         Move at a reasonable speed.
         """
         # Done: Do this as STEP 3 of implementing this class.
+        self.motor.reset_degrees_spun()
         self.motor.start_spinning(100)
 
         while True:
