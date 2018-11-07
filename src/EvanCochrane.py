@@ -1,5 +1,5 @@
 """
-  Capstone Project.  Code written by PUT_YOUR_NAME_HERE.
+  Capstone Project.  Code written by Evan Cochrane.
   Fall term, 2018-2019.
 """
 

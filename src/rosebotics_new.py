@@ -272,6 +272,9 @@ class DriveSystem(object):
         # Done:   Assume that the conversion is linear with respect to speed.
         # Done: Don't forget that the Wheel object's position begins wherever
         # Done:   it last was, not necessarily 0.
+
+        # Possibly Broken? FIXME?
+
         if degrees >= 0:
             self.start_moving(0, duty_cycle_percent)
 
@@ -284,11 +287,13 @@ class DriveSystem(object):
                     break
         else:
             self.start_moving(duty_cycle_percent, 0)
+
             starting_angle = self.left_wheel.get_degrees_spun()
+
             while True:
                 angle_moved = self.left_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving()
+                    self.stop_moving(stop_action.value)
                     break
 
 
