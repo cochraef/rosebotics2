@@ -12,15 +12,16 @@ import time
 def main():
 
     """ Runs YOUR specific part of the project """
-    # run_test_for_wait_until_intensity_is_less_than()
-    # run_test_for_wait_until_intensity_is_greater_than()
-    # run_test_for_wait_until_color_is()
-    # run_test_for_wait_until_color_is_one_of()
-    # run_test_for_beeping_based_camera()
-    run_beep_for_top_red_button()
+    # wait_until_intensity_is_less_than()
+    # wait_until_intensity_is_greater_than()
+    # wait_until_color_is()
+    # wait_until_color_is_one_of()
+    # beeping_based_camera()
+    # beep_for_top_red_button()
+    black_line()
 
 
-def run_test_for_wait_until_intensity_is_less_than():
+def wait_until_intensity_is_less_than():
 
     # Test 1
     robot = rb.Snatch3rRobot()
@@ -44,7 +45,7 @@ def run_test_for_wait_until_intensity_is_less_than():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
 
-def run_test_for_wait_until_intensity_is_greater_than():
+def wait_until_intensity_is_greater_than():
 
     # Test 1
     robot = rb.Snatch3rRobot()
@@ -69,7 +70,7 @@ def run_test_for_wait_until_intensity_is_greater_than():
 
 
 # This one works!!!
-def run_test_for_wait_until_color_is():
+def wait_until_color_is():
 
     # Test 1
     """The robot should stop if it sees Black"""
@@ -93,7 +94,7 @@ def run_test_for_wait_until_color_is():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
 
-def run_test_for_wait_until_color_is_one_of():
+def wait_until_color_is_one_of():
     # Test 1
     """The robot should stop if it sees Yellow, Red, or White"""
     robot = rb.Snatch3rRobot()
@@ -116,7 +117,7 @@ def run_test_for_wait_until_color_is_one_of():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
 
-def run_test_for_beeping_based_camera():
+def beeping_based_camera():
     robot = rb2.Snatch3rRobot()
     while True:
         width = robot.camera.get_biggest_blob().width
@@ -133,7 +134,7 @@ def run_test_for_beeping_based_camera():
             break
 
 
-def run_beep_for_top_red_button():
+def beep_for_top_red_button():
     robot = rb2.Snatch3rRobot()
     while True:
         if robot.beacon_button_sensor.is_top_red_button_pressed():
@@ -144,5 +145,19 @@ def run_beep_for_top_red_button():
             break
 
 
+def black_line():
+    robot = rb.Snatch3rRobot()
+    robot.drive_system.start_moving(25, 25)
+    while True:
+        if robot.color_sensor.wait_until_color_is(6) is True:
+                robot.drive_system.stop_moving()
+                robot.drive_system.left_wheel.start_spinning(50)
+                if robot.color_sensor.wait_until_color_is(1):
+                    robot.drive_system.stop_moving()
+                    robot.drive_system.start_moving(25, 25)
+        elif robot.touch_sensor.wait_until_pressed() is True:
+            robot.drive_system.stop_moving()
+            break
+    print('COMPLETED')
 
 main()
