@@ -16,7 +16,8 @@ def main():
     # run_test_for_wait_until_intensity_is_greater_than()
     # run_test_for_wait_until_color_is()
     # run_test_for_wait_until_color_is_one_of()
-    run_test_for_beeping_based_camera()
+    # run_test_for_beeping_based_camera()
+    run_beep_for_top_red_button()
 
 
 def run_test_for_wait_until_intensity_is_less_than():
@@ -130,6 +131,18 @@ def run_test_for_beeping_based_camera():
         if robot.touch_sensor.is_pressed():
             print('COMPLETED')
             break
+
+
+def run_beep_for_top_red_button():
+    robot = rb2.Snatch3rRobot()
+    while True:
+        if robot.beacon_button_sensor.is_top_red_button_pressed():
+            ev3.Sound.beep()
+        if robot.beacon_button_sensor.is_top_blue_button_pressed():
+            ev3.Sound.speak('Hello, How are you?')
+        if robot.touch_sensor.is_pressed():
+            break
+
 
 
 main()

@@ -172,8 +172,8 @@ class DriveSystem(object):
         """
         STOPS the robot, using the given StopAction (which defaults to BRAKE).
         """
-        self.left_wheel.stop_spinning(stop_action)
-        self.right_wheel.stop_spinning(stop_action)
+        self.left_wheel.stop_spinning()
+        self.right_wheel.stop_spinning()
 
     def move_for_seconds(self,
                          seconds,
@@ -195,7 +195,7 @@ class DriveSystem(object):
         start_time = time.time()
         while True:
             if time.time() - start_time > seconds:
-                self.stop_moving(stop_action.value)
+                self.stop_moving()
                 break
 
     def go_straight_inches(self,
@@ -219,7 +219,7 @@ class DriveSystem(object):
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 88.07 * abs(inches):  # From Test Data - Linear Regression
-                self.stop_moving(stop_action.value)
+                self.stop_moving()
                 break
 
     def spin_in_place_degrees(self,
@@ -247,7 +247,7 @@ class DriveSystem(object):
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
             if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
-                self.stop_moving(stop_action.value)
+                self.stop_moving()
                 break
 
     def turn_degrees(self,
@@ -279,7 +279,7 @@ class DriveSystem(object):
             while True:
                 angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving(stop_action.value)
+                    self.stop_moving()
                     break
 
         else:
@@ -290,7 +290,7 @@ class DriveSystem(object):
             while True:
                 angle_moved = self.left_wheel.get_degrees_spun() - starting_angle
                 if abs(angle_moved) >= 10.6 * abs(degrees):  # From Guess-and-Check
-                    self.stop_moving(stop_action.value)
+                    self.stop_moving()
                     break
 
 
