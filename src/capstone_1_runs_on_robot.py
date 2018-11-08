@@ -20,7 +20,7 @@ def main():
     robot = rb.Snatch3rRobot()
 
     rc = RemoteControl(robot)
-    receiver = com.MqttClient()
+    receiver = com.MqttClient(rc)
     receiver.connect_to_pc()
 
     while True:
@@ -31,13 +31,14 @@ def main():
         blue_pressed = robot.beacon_button_sensor.is_top_blue_button_pressed()
 
         if red_pressed and blue_pressed:
-
             robot.sound.play_beep()
             robot.sound.speak("Hello. How are you?", False)
+
         elif red_pressed and not blue_pressed:
             robot.sound.play_beep()
+
         elif blue_pressed and not red_pressed:
-            robot.sound.speak("Hello. How are you.")
+            robot.sound.speak("Hello. How are you?")
 
         time.sleep(0.01)  # For the delegate to do its work
 
