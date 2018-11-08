@@ -742,9 +742,7 @@ class ArmAndClaw(object):
         """
         # Done: Do this as STEP 2 of implementing this class.
         self.motor.start_spinning(100)
-        while True:
-            if self.touch_sensor.get_value() == 1:
-                break
+        self.touch_sensor.wait_until_pressed()
         self.motor.stop_spinning()
         self.motor.reset_degrees_spun()
         self.motor.start_spinning(-100)
@@ -781,6 +779,9 @@ class ArmAndClaw(object):
             if self.motor.get_degrees_spun() == position:
                 self.motor.stop_spinning()
                 break
+
+    def spin_down(self):
+        self.motor.start_spinning(-100)
 
 
 class Sound(object):

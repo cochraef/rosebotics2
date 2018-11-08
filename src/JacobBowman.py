@@ -58,8 +58,8 @@ def test_black_line():
 
 
 def test_arm():
-    arm1 = rb.ArmAndClaw(rb.Snatch3rRobot)
-    arm1.calibrate()
+    robot = rb.Snatch3rRobot()
+    robot.arm.calibrate()
 
 
 main()
