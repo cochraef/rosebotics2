@@ -23,27 +23,12 @@ def main():
     mqtt_client = com.MqttClient(rc)
     mqtt_client.connect_to_pc()
 
-    # --------------------------------------------------------------------------
-    # TODO: 5. Add a class for your "delegate" object that will handle messages
-    # TODO:    sent from the laptop.  Construct an instance of the class and
-    # TODO:    pass it to the MqttClient constructor above.  Augment the class
-    # TODO:    as needed for that, and also to handle the go_forward message.
-    # TODO:    Test by PRINTING, then with robot.  When OK, delete this TODO.
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # TODO: 6. With your instructor, discuss why the following WHILE loop,
-    # TODO:    that appears to do nothing, is necessary.
-    # TODO:    When you understand this, delete this TODO.
-    # --------------------------------------------------------------------------
     while True:
-        # ----------------------------------------------------------------------
-        # TODO: 7. Add code that makes the robot beep if the top-red button
-        # TODO:    on the Beacon is pressed.  Add code that makes the robot
-        # TODO:    speak "Hello. How are you?" if the top-blue button on the
-        # TODO:    Beacon is pressed.  Test.  When done, delete this TODO.
-        # ----------------------------------------------------------------------
-        time.sleep(0.01)  # For the delegate to do its work
+        if robot.beacon_button_sensor.is_top_red_button_pressed():
+            ev3.Sound.beep()
+        if robot.beacon_button_sensor.is_top_blue_button_pressed():
+            ev3.Sound.speak('Hello, How are you?')
+        time.sleep(0.01)
 
 
 class RemoteControlEtc(object):
@@ -59,6 +44,27 @@ class RemoteControlEtc(object):
         print('Telling the robot to start moving at', speed_string)
         speed = int(speed_string)
         self.robot.drive_system.start_moving(speed, speed)
+        if self.robot.touch_sensor.is_pressed():
+            self.robot.drive_system.stop_moving()
+        print('COMPLETED')
+
+    def beep_for_red_button(self, beep_string):
+        """Makes the robot if top-red button on Beacon is pressed"""
+        print('Telling the robot to beep', beep_string, 'times')
+        beeps = int(beep_string)
+        for k in range(beeps):
+            self.robot.sound.play_beep()
+            print('Beep #', (k + 1), 'completed')
+            self.robot.sound.set_wait_time(0.5)
+
+    def beep_for_blue_button(self, beep_string):
+        """Makes the robot if top-blue_button on Beacon is pressed"""
+        print('Telling the robot to beep', beep_string, 'times')
+        beeps = int(beep_string)
+        for k in range(beeps):
+            self.robot.sound.play_beep()
+            print('Beep #', (k + 1), 'completed')
+            self.robot.sound.set_wait_time(0.5)
 
     def beeping(self, beep_string):
         """Makes the robot beep a certain amount of times"""
