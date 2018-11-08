@@ -2,13 +2,9 @@
   Capstone Project.
   This module contains high-level, general-purpose methods for a Snatch3r robot.
 
-  Team members:  PUT_YOUR_NAMES_HERE.
+  Team members:  Jacob Bowman, Evan Cochrane, Jasmine Scott.
   Fall term, 2018-2019.
 """
-# TODO: Put your names in the above.
-# TODO: Do the TODO's below.
-# TODO: Augment this module as appropriate, being sure to always
-# TODO:   ** coordinate with your teammates ** in doing so.
 
 from ev3dev import ev3
 from enum import Enum
