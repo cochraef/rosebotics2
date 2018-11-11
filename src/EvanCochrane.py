@@ -8,14 +8,15 @@ import time
 
 
 def main():
-    """ Runs YOUR specific part of the project """
+    """ Runs YOUR specific part of the project. Uncomment tests as needed. """
 
     print('why not?')
-    # test_go_straight_inches_method()
+
+    test_go_straight_inches_method()
     # test_spin_in_place_degrees_method()
     # test_turn_degrees_method()
     # test_move_in_polygon_function()
-    infrared_tester(9, 15)
+    # infrared_tester(9, 15)
 
 
 def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
