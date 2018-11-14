@@ -37,14 +37,12 @@ def main():
                 robot.drive_system.spin_in_place_degrees(90)
             elif robot.color_sensor.wait_until_color_is(4):
                 robot.drive_system.spin_in_place_degrees(270)
-            elif robot.color_sensor.wait_until_color_is(7):
-                robot.drive_system.spin_in_place_degrees(360)
-            elif robot.color_sensor.wait_until_color_is(6):
-                robot.sound.play_beep()
-            elif robot.color_sensor.wait_until_color_is(1):
-                robot.sound.speak('You completed the maze!')
-            elif robot.color_sensor.wait_until_color_is(3):
-                robot.sound.speak("Would you like to go forward or turn right?")
+            #elif robot.color_sensor.wait_until_color_is(7):
+                #robot.drive_system.spin_in_place_degrees(360)
+            #elif robot.color_sensor.wait_until_color_is(1):
+                #robot.sound.speak('You completed the maze!')
+            #elif robot.color_sensor.wait_until_color_is(3):
+                #robot.sound.speak("Would you like to go forward or turn right?")
             "For the robot's proximity sensors"
             #if robot.proximity_sensor.get_distance_to_nearest_object() > 100:
                 #ev3.Sound.speak('You must take another path')
@@ -56,14 +54,12 @@ def main():
                 robot.drive_system.spin_in_place_degrees(90)
             elif robot.color_sensor.wait_until_color_is(4):
                 robot.drive_system.spin_in_place_degrees(270)
-            elif robot.color_sensor.wait_until_color_is(7):
-                robot.drive_system.spin_in_place_degrees(360)
-            elif robot.color_sensor.wait_until_color_is(6):
-                robot.sound.play_beep()
-            elif robot.color_sensor.wait_until_color_is(1):
-                robot.sound.speak('You completed the maze!')
-            elif robot.color_sensor.wait_until_color_is(3):
-                robot.sound.speak("Would you like to go forward or turn right?")
+            #elif robot.color_sensor.wait_until_color_is(7):
+                #robot.drive_system.spin_in_place_degrees(360)
+            #elif robot.color_sensor.wait_until_color_is(1):
+                #robot.sound.speak('You completed the maze!')
+            #elif robot.color_sensor.wait_until_color_is(3):
+                #robot.sound.speak("Would you like to go forward or turn right?")
             "For the robot's proximity sensors"
             #if robot.proximity_sensor.get_distance_to_nearest_object() > 100:
                 #ev3.Sound.speak('You must take another path')
