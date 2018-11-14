@@ -125,6 +125,10 @@ def construct_viewing_window(mqtt_client, width_window, height_window, window_st
     window_store.viewing_window = viewing_window
     window_store.canvas = canvas
 
+    rc = AddToDrawing(canvas, wall_color, floor_color, width_window, height_window)
+    receiver = com.MqttClient(rc)
+    receiver.connect_to_ev3()
+
 
 def kill_viewing_window(window_store):
     """ Closes the viewing window when called. Ends the robot's program. """
@@ -144,6 +148,22 @@ def handle_initialize(mqtt_client, using_custom_floor_color_as_string):
     """ Causes the robot to start its program. """
 
     mqtt_client.send_message("initialize", [using_custom_floor_color_as_string])
+
+
+class AddToDrawing(object):
+    def __init__(self, canvas, wall_color, floor_color, width_window, height_window):
+        self.canvas = canvas
+        self.wall_color = wall_color
+        self.floor_color = floor_color
+        self.width = width_window
+        self.height = height_window
+
+    def given_coordinates(self, x_coordinate, y_coordinate, x_prev, y_prev):
+        self.canvas.create_line(5 * float(x_coordinate),
+                                5 * float(x_prev),
+                                5 * float(y_coordinate),
+                                5 * float(y_prev),
+                                fill=self.canvas.get())
 
 
 main()
