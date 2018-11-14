@@ -10,6 +10,7 @@ from ev3dev import ev3
 from enum import Enum
 import low_level_rosebotics_new as low_level_rb
 import time
+import math
 
 # ------------------------------------------------------------------------------
 # Global constants.  Reference them as (for example):  rb.BRAKE   rb.GREEN
@@ -159,6 +160,10 @@ class DriveSystem(object):
         self.left_wheel = low_level_rb.Wheel(left_wheel_port)
         self.right_wheel = low_level_rb.Wheel(right_wheel_port)
 
+        self.x_coord_in_inches = 0
+        self.y_coord_in_inches = 0
+        self.angle_in_radians = 0
+
     def start_moving(self,
                      left_wheel_duty_cycle_percent=100,
                      right_wheel_duty_cycle_percent=100):
@@ -223,6 +228,9 @@ class DriveSystem(object):
                 self.stop_moving()
                 break
 
+        self.x_coord_in_inches += inches * math.cos(self.angle_in_radians)
+        self.y_coord_in_inches += inches * math.sin(self.angle_in_radians)
+
     def spin_in_place_degrees(self,
                               degrees,
                               duty_cycle_percent=100,
@@ -250,6 +258,8 @@ class DriveSystem(object):
             if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
                 self.stop_moving()
                 break
+
+        self.angle_in_radians += -(math.pi / 180)*degrees*math.copysign(1, duty_cycle_percent)
 
     def turn_degrees(self,
                      degrees,

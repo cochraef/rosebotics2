@@ -23,9 +23,6 @@ class RemoteControl(object):
         """
         self.robot = robot
 
-        self.starting_angle = 0
-        self.x_coord = 0
-        self.y_coord = 0
 
     def initialize(self, using_custom_floor_color_as_string):
         """ Sets the algorithm that lets the robot map out the floor plan. """
@@ -41,11 +38,10 @@ class RemoteControl(object):
 
         while True:
             if self.robot.touch_sensor.is_pressed():
-                run_floor_plan_algorithm(using_custom_floor_color)
+                self.run_floor_plan_algorithm(using_custom_floor_color)
 
+    def run_floor_plan_algorithm(self, custom_floor_color):
 
-def run_floor_plan_algorithm(custom_floor_color):
-    pass
 
 
 main()
