@@ -49,7 +49,7 @@ def main():
             ev3.Sound.speak('You completed the maze!')
         if robot.color_sensor.wait_until_color_is(3):
             ev3.Sound.speak("Would you like to go forward or turn right?")
-    
+
         time.sleep(0.01)
 
 
