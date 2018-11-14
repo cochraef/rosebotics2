@@ -37,7 +37,7 @@ def main():
         "For the robot's proximity sensors"
         if robot.proximity_sensor.get_distance_to_nearest_object() > 50:
             ev3.Sound.speak('You must take another path')
-
+            robot.drive_system.turn_degrees(90)
         " If the robot sees any of these colors, do an action "
         if robot.color_sensor.wait_until_color_is(2):
             robot.drive_system.turn_degrees(90)
@@ -49,9 +49,7 @@ def main():
             ev3.Sound.speak('You completed the maze!')
         if robot.color_sensor.wait_until_color_is(3):
             ev3.Sound.speak("Would you like to go forward or turn right?")
-            RemoteControlEtc.turn_right()
-
-
+    
         time.sleep(0.01)
 
 

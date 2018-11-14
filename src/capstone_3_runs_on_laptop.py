@@ -50,15 +50,6 @@ def setup_gui(root_window, mqtt_client):
     frame = ttk.Frame(root_window, padding=10)
     frame.grid()
 
-    #beeping_entry_box = ttk.Entry(frame)
-    #beeping_button = ttk.Button(frame, text='BEEP!')
-
-    #beeping_entry_box.grid()
-    #beeping_button.grid()
-
-    #beeping_button['command'] = \
-        #lambda: beeping(beeping_entry_box, mqtt_client)
-
     forward_button = ttk.Button(frame, text='Forward')
     forward_button['command'] = (lambda: forward(mqtt_client))
     turn_right_button = ttk.Button(frame, text='Turn Right')
@@ -66,7 +57,12 @@ def setup_gui(root_window, mqtt_client):
     forward_button.grid()
     turn_right_button.grid()
 
-
+    #beeping_entry_box = ttk.Entry(frame)
+    #beeping_button = ttk.Button(frame, text='BEEP!')
+    #beeping_entry_box.grid()
+    #beeping_button.grid()
+    #beeping_button['command'] = \
+        #lambda: beeping(beeping_entry_box, mqtt_client)
 
     #speed_entry_box = ttk.Entry(frame)
     #go_forward_button = ttk.Button(frame, text="Go forward")
@@ -74,7 +70,6 @@ def setup_gui(root_window, mqtt_client):
     #go_forward_button.grid()
     #go_forward_button['command'] = \
         #lambda: handle_go_forwards(speed_entry_box, mqtt_client)
-
 
 def handle_go_forwards(entry_box, mqtt_client):
     """
@@ -93,15 +88,19 @@ def beeping(entry_box_for_beeping, mqtt_client):
     print('Sending the beeping message with amount of beeps', beep_string)
     mqtt_client.send_message('beeping', [beep_string])
 
+
 def forward(mqtt_client):
-   """
-   Has the robot go forward based on the users request
-   """
+    """
+    Has the robot go forward based on the users request
+    """
+    mqtt_client.send_message(forward())
+
 
 def turn_right(mqtt_client):
     """
     Has the robot turn right based on the users request
     """
+    mqtt_client.send_message()
 
 
 main()
