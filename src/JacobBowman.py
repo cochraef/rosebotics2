@@ -35,18 +35,15 @@ def find_color(color):
 
 def black_line():
     robot = rb.Snatch3rRobot()
-    robot.drive_system.start_moving(25, 25)
     while True:
-        if robot.color_sensor.wait_until_color_is(6) is True:
+        if robot.color_sensor.wait_until_color_is(1) is True:
+            robot.drive_system.start_moving(25, 25)
+        elif robot.color_sensor.wait_until_color_is(6) is True:
             robot.drive_system.stop_moving()
             robot.drive_system.start_moving(50, 0)
-        if robot.color_sensor.wait_until_color_is(1) is True:
-            time.sleep(.5)
+        elif robot.color_sensor.wait_until_color_is(1) is True:
             robot.drive_system.stop_moving()
             robot.drive_system.start_moving(25, 25)
-        if robot.touch_sensor.wait_until_pressed() is True:
-            robot.drive_system.stop_moving()
-            break
 
 
 def test_find_color(color):
@@ -60,6 +57,11 @@ def test_black_line():
 def test_arm():
     robot = rb.Snatch3rRobot()
     robot.arm.calibrate()
+
+
+def ryg():
+    robot = rb.Snatch3rRobot()
+    robot.camera.get_biggest_blob().__getattribute__('color')
 
 
 main()
