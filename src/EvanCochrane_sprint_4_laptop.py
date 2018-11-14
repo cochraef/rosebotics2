@@ -120,12 +120,10 @@ def construct_viewing_window(mqtt_client, width_window, height_window, window_st
 
     start_button = tkinter.Button(viewing_window, text='Go!', bg='blue', fg='white')
     start_button.place(x=0, y=height-20)
-    start_button['command'] = lambda: handle_initialize(mqtt_client, observer)
+    start_button['command'] = lambda: handle_initialize(mqtt_client, observer.get())
 
     window_store.viewing_window = viewing_window
     window_store.canvas = canvas
-
-    print(observer.get())
 
 
 def kill_viewing_window(window_store):
@@ -144,6 +142,7 @@ def reset_viewing_window(window_store):
 
 def handle_initialize(mqtt_client, using_custom_floor_color_as_string):
     """ Causes the robot to start its program. """
+
     mqtt_client.send_message("initialize", [using_custom_floor_color_as_string])
 
 

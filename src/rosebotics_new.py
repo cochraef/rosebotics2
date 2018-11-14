@@ -255,7 +255,7 @@ class DriveSystem(object):
 
         while True:
             angle_moved = self.right_wheel.get_degrees_spun() - starting_angle
-            if abs(angle_moved) >= 5.3 * abs(degrees):  # From Guess-and-Check
+            if abs(angle_moved) >= 5.43 * abs(degrees):  # From Guess-and-Check
                 self.stop_moving()
                 break
 
@@ -803,7 +803,7 @@ class Sound(object):
 
         self.time_after_play = 0
 
-        self.volume = 100
+        self.volume = 40
         ev3.Sound.set_volume(self.volume)
 
     def set_wait_time(self, seconds):
