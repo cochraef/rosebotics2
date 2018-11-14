@@ -28,6 +28,10 @@ class RemoteControl(object):
 
         self.average_floor_color = [0, 0, 0]
 
+        self.mqtt_client = None
+        self.prev_x = 0
+        self.prev_y = 0
+
     def initialize(self, using_custom_floor_color_as_string):
         """ Sets the algorithm that lets the robot map out the floor plan. """
 
@@ -38,7 +42,12 @@ class RemoteControl(object):
 
         self.robot.sound.set_wait_time(2)
 
-        # self.robot.sound.speak("Put me in a corner facing facing a wall, then press the touch sensor to start.")
+        self.robot.sound.speak("Put me in a corner facing a wall, then press the touch sensor to start.")
+
+        instructor = com.MqttClient()
+        instructor.connect_to_pc()
+
+        self.mqtt_client = instructor
 
         while True:
             if self.robot.touch_sensor.is_pressed():
@@ -48,11 +57,13 @@ class RemoteControl(object):
     def run_floor_plan_algorithm(self, custom_floor_color):
         """ Determines whether to move clockwise or counterclockwise to map the walls."""
         self.robot.drive_system.turn_degrees(90, 100)
-        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 6:
-            self.counterclockwise = True
-        self.robot.drive_system.turn_degrees(180, -100)
-        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 6:
+        print(self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 10:
             self.clockwise = True
+        self.robot.drive_system.turn_degrees(180, -100)
+        print(self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches())
+        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 10:
+            self.counterclockwise = True
 
         if self.counterclockwise and self.clockwise:
             print("The robot appears to be in a tight corridor. It should be up against only two walls. Aborting.")
@@ -73,20 +84,29 @@ class RemoteControl(object):
     def floor_plan(self, custom_floor_color, n):
         """ General algorithm for determining the layout of a room and sending positional
         information about the room back to to laptop. """
+        count = -1
+        self.robot.drive_system.x_current = 0
+        self.robot.drive_system.y_current = 0
         while True:
 
-            count = -1
+            self.prev_x = self.robot.drive_system.x_current
+            self.prev_y = self.robot.drive_system.y_current
+
             self.robot.drive_system.go_straight_inches(10, 80)
             count += 1
-            self.check_for_missing_walls(10, n)
+            self.mqtt_client.send_message("given_coordinates", [str(self.robot.drive_system.x_current),
+                                                                str(self.robot.drive_system.y_current),
+                                                                str(self.prev_x),
+                                                                str(self.prev_y)])
+            # self.check_for_missing_walls(10, -n)
             if not custom_floor_color:
                 color_tuple = self.robot.color_sensor.get_value()
                 for k in range(len(color_tuple)):
                     self.average_floor_color[k] = (self.average_floor_color[k] + color_tuple[k])/(count + 1)
-            elif self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 6:
-                self.robot.drive_system.turn_degrees(90, math.copysign(100, n))
+            if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() <= 10:
+                self.robot.drive_system.turn_degrees(90, math.copysign(100, -n))
             elif math.sqrt(self.robot.drive_system.x_coord_in_inches ** 2 +
-                           self.robot.drive_system.y_coord_in_inches ** 2) <= 1 and count > 4:
+                           self.robot.drive_system.y_coord_in_inches ** 2) <= 20 and count > 5:
                 break
 
     def check_for_missing_walls(self, inches, n):
@@ -96,7 +116,7 @@ class RemoteControl(object):
         """
 
         self.robot.drive_system.turn_degrees(90, math.copysign(100, -n))
-        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() >= 6:
+        if self.robot.proximity_sensor.get_distance_to_nearest_object_in_inches() >= 10:
             self.robot.drive_system.turn_degrees(90, math.copysign(100, n))
             self.robot.drive_system.go_straight_inches(inches/2, -80)
             self.check_for_missing_walls(inches/2, n)
