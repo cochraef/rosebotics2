@@ -93,7 +93,7 @@ def forward(mqtt_client):
     """
     Has the robot go forward based on the users request
     """
-    mqtt_client.send_message(forward())
+    mqtt_client.send_message()
 
 
 def turn_right(mqtt_client):

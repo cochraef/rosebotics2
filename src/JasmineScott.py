@@ -7,7 +7,7 @@ import rosebotics as rb
 import rosebotics_new as rb2
 import ev3dev.ev3 as ev3
 import time
-
+import EvanCochrane
 
 def main():
 
@@ -160,22 +160,24 @@ def black_line():
             break
     print('COMPLETED')
 
- def beep_for_red_button(self, beep_string):
-        """Makes the robot if top-red button on Beacon is pressed"""
-        print('Telling the robot to beep', beep_string, 'times')
-        beeps = int(beep_string)
-        for k in range(beeps):
-            self.robot.sound.play_beep()
-            print('Beep #', (k + 1), 'completed')
-            self.robot.sound.set_wait_time(0.5)
 
-    def beep_for_blue_button(self, beep_string):
-        """Makes the robot if top-blue_button on Beacon is pressed"""
-        print('Telling the robot to beep', beep_string, 'times')
-        beeps = int(beep_string)
-        for k in range(beeps):
-            self.robot.sound.play_beep()
-            print('Beep #', (k + 1), 'completed')
-            self.robot.sound.set_wait_time(0.5)
+def beep_for_red_button(self, beep_string):
+    """Makes the robot if top-red button on Beacon is pressed"""
+    print('Telling the robot to beep', beep_string, 'times')
+    beeps = int(beep_string)
+    for k in range(beeps):
+        self.robot.sound.play_beep()
+        print('Beep #', (k + 1), 'completed')
+        self.robot.sound.set_wait_time(0.5)
+
+
+def beep_for_blue_button(self, beep_string):
+    """Makes the robot if top-blue_button on Beacon is pressed"""
+    print('Telling the robot to beep', beep_string, 'times')
+    beeps = int(beep_string)
+    for k in range(beeps):
+        self.robot.sound.play_beep()
+        print('Beep #', (k + 1), 'completed')
+        self.robot.sound.set_wait_time(0.5)
 
 main()

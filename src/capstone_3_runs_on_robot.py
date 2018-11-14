@@ -23,35 +23,52 @@ def main():
     mqtt_client = com.MqttClient(rc)
     mqtt_client.connect_to_pc()
 
-    while True:
-        #if robot.beacon_button_sensor.is_top_red_button_pressed():
-            #ev3.Sound.beep()
-        #if robot.beacon_button_sensor.is_top_blue_button_pressed():
-            #ev3.Sound.speak('Hello, How are you?')
+    #if robot.beacon_button_sensor.is_top_red_button_pressed():
+        #ev3.Sound.beep()
+    #if robot.beacon_button_sensor.is_top_blue_button_pressed():
+        #ev3.Sound.speak('Hello, How are you?')
 
+    while True:
         " How the user controls the robot "
         if robot.beacon_button_sensor.is_top_red_button_pressed():
-            robot.drive_system.start_moving(30, 30)
-        if robot.beacon_button_sensor.is_top_blue_button_pressed():
-            robot.drive_system.start_moving(-30, 30)
-        "For the robot's proximity sensors"
-        if robot.proximity_sensor.get_distance_to_nearest_object() > 50:
-            ev3.Sound.speak('You must take another path')
-            robot.drive_system.turn_degrees(90)
-        " If the robot sees any of these colors, do an action "
-        if robot.color_sensor.wait_until_color_is(2):
-            robot.drive_system.turn_degrees(90)
-        if robot.color_sensor.wait_until_color_is(4):
-            robot.drive_system.turn_degrees(-90)
-        if robot.color_sensor.wait_until_color_is(7):
-            robot.drive_system.turn_degrees(360)
-        if robot.color_sensor.wait_until_color_is(5):
-            ev3.Sound.speak('You completed the maze!')
-        if robot.color_sensor.wait_until_color_is(3):
-            ev3.Sound.speak("Would you like to go forward or turn right?")
-
-        time.sleep(0.01)
-
+            robot.drive_system.move_for_seconds(3, 50, 50)
+            " If the robot sees any of these colors, do an action "
+            if robot.color_sensor.wait_until_color_is(2):
+                robot.drive_system.spin_in_place_degrees(90)
+            elif robot.color_sensor.wait_until_color_is(4):
+                robot.drive_system.spin_in_place_degrees(270)
+            elif robot.color_sensor.wait_until_color_is(7):
+                robot.drive_system.spin_in_place_degrees(360)
+            elif robot.color_sensor.wait_until_color_is(6):
+                robot.sound.play_beep()
+            elif robot.color_sensor.wait_until_color_is(1):
+                robot.sound.speak('You completed the maze!')
+            elif robot.color_sensor.wait_until_color_is(3):
+                robot.sound.speak("Would you like to go forward or turn right?")
+            "For the robot's proximity sensors"
+            #if robot.proximity_sensor.get_distance_to_nearest_object() > 100:
+                #ev3.Sound.speak('You must take another path')
+                #robot.drive_system.turn_degrees(90)
+        elif robot.beacon_button_sensor.is_top_blue_button_pressed():
+            robot.drive_system.move_for_seconds(3, -50, -50)
+            " If the robot sees any of these colors, do an action "
+            if robot.color_sensor.wait_until_color_is(2):
+                robot.drive_system.spin_in_place_degrees(90)
+            elif robot.color_sensor.wait_until_color_is(4):
+                robot.drive_system.spin_in_place_degrees(270)
+            elif robot.color_sensor.wait_until_color_is(7):
+                robot.drive_system.spin_in_place_degrees(360)
+            elif robot.color_sensor.wait_until_color_is(6):
+                robot.sound.play_beep()
+            elif robot.color_sensor.wait_until_color_is(1):
+                robot.sound.speak('You completed the maze!')
+            elif robot.color_sensor.wait_until_color_is(3):
+                robot.sound.speak("Would you like to go forward or turn right?")
+            "For the robot's proximity sensors"
+            #if robot.proximity_sensor.get_distance_to_nearest_object() > 100:
+                #ev3.Sound.speak('You must take another path')
+                #robot.drive_system.turn_degrees(90)
+        time.sleep(.01)
 
 class RemoteControlEtc(object):
     def __init__(self, robot):
@@ -85,5 +102,6 @@ class RemoteControlEtc(object):
 
     def forward(self):
         ev3.Sound.beep()
+
 
 main()
