@@ -8,14 +8,15 @@ import time
 
 
 def main():
-    """ Runs YOUR specific part of the project """
+    """ Runs YOUR specific part of the project. Uncomment tests as needed. """
 
     print('why not?')
+
     # test_go_straight_inches_method()
-    # test_spin_in_place_degrees_method()
+    test_spin_in_place_degrees_method()
     # test_turn_degrees_method()
     # test_move_in_polygon_function()
-    infrared_tester(9, 15)
+    # infrared_tester(9, 15)
 
 
 def move_in_polygon(robot, n, length_of_each_side=5, speed=100):
@@ -165,6 +166,7 @@ def infrared_tester(low, high, beep_volume=100):
     my_robot.sound.set_volume(beep_volume)
     while True:
         dist = my_robot.proximity_sensor.get_distance_to_nearest_object_in_inches()
+        print(dist)
         if low <= dist <= high:
             my_robot.sound.play_beep()
         if my_robot.touch_sensor.is_pressed():
