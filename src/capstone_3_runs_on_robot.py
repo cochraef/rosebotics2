@@ -66,6 +66,7 @@ def main():
                 #robot.drive_system.turn_degrees(90)
         time.sleep(.01)
 
+
 class RemoteControlEtc(object):
     def __init__(self, robot):
         """
@@ -91,13 +92,6 @@ class RemoteControlEtc(object):
             self.robot.sound.play_beep()
             print('Beep #', (k + 1), 'completed')
             self.robot.sound.set_wait_time(0.5)
-
-    def turn_right(self):
-        self.robot.drive_system.turn_degrees(90)
-        ev3.Sound.beep()
-
-    def forward(self):
-        ev3.Sound.beep()
 
 
 main()

@@ -14,11 +14,11 @@ def main():
     """ Runs YOUR specific part of the project """
     # wait_until_intensity_is_less_than()
     # wait_until_intensity_is_greater_than()
-    # wait_until_color_is()
+    wait_until_color_is()
     # wait_until_color_is_one_of()
     # beeping_based_camera()
     # beep_for_top_red_button()
-    black_line()
+    # black_line()
 
 
 def wait_until_intensity_is_less_than():
@@ -73,10 +73,10 @@ def wait_until_intensity_is_greater_than():
 def wait_until_color_is():
 
     # Test 1
-    """The robot should stop if it sees Black"""
+    """The robot should stop if it sees Green"""
     robot = rb.Snatch3rRobot()
     robot.drive_system.start_moving(20, 20)
-    robot.color_sensor.wait_until_color_is(1)
+    robot.color_sensor.wait_until_color_is(3)
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
     # Test 2
@@ -87,7 +87,7 @@ def wait_until_color_is():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
     # Test 3
-    """The robot should stop if it sees Blue"""
+    """The robot should stop if it sees Yellow"""
     robot = rb.Snatch3rRobot()
     robot.drive_system.start_moving(40, 40)
     robot.color_sensor.wait_until_color_is(4)
@@ -117,7 +117,7 @@ def wait_until_color_is_one_of():
     robot.drive_system.stop_moving(rb.StopAction.BRAKE)
 
 
-def beeping_based_camera():
+def camera():
     robot = rb2.Snatch3rRobot()
     while True:
         width = robot.camera.get_biggest_blob().width
@@ -125,13 +125,13 @@ def beeping_based_camera():
 
         area = width * height
 
-        if area > 1000:
-            print("I SEE THE OBJECT")
-            ev3.Sound.beep()
+        #if area > 1000:
+            #print("I SEE THE OBJECT")
+            #ev3.Sound.beep()
 
-        if robot.touch_sensor.is_pressed():
-            print('COMPLETED')
-            break
+        #if robot.touch_sensor.is_pressed():
+            #rint('COMPLETED')
+            #break
 
 
 def beep_for_top_red_button():
