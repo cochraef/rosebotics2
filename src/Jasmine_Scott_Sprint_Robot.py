@@ -27,13 +27,12 @@ def main():
             time.sleep(.01)
 
 
-def camera():
+def object_area():
     robot = rb.Snatch3rRobot()
     width = robot.camera.get_biggest_blob().width
     height = robot.camera.get_biggest_blob().height
     area = width * height
     return area
-
 
 
 class RemoteControlEtc(object):
@@ -43,6 +42,26 @@ class RemoteControlEtc(object):
             :type robot: rb.Snatch3rRobot
         """
         self.robot = robot
+        self.width = self.robot.camera.get_biggest_blob().width
+        self.height = self.robot.camera.get_biggest_blob().height
+        self.area = self.width * self.height
+
+    def get_near_object(self):
+        while True:
+            width = self.robot.camera.get_biggest_blob().width
+            height = self.robot.camera.get_biggest_blob().height
+
+            area = width * height
+            if area > 300:
+                self.robot.sound.speak('Yes, I can see the object')
+                self.robot.sound.set_wait_time(.05)
+            elif object_area() < 100:
+                self.robot.sound.speak('No, I cannot see the object')
+                self.robot.sound.set_wait_time(.05)
+            elif object_area() > 500:
+                self.robot.sound.speak('I found the object, so I will stop looking')
+                break
+
 
 
 

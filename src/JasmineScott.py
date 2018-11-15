@@ -7,16 +7,15 @@ import rosebotics as rb
 import rosebotics_new as rb2
 import ev3dev.ev3 as ev3
 import time
-import EvanCochrane
 
 def main():
 
     """ Runs YOUR specific part of the project """
     # wait_until_intensity_is_less_than()
     # wait_until_intensity_is_greater_than()
-    wait_until_color_is()
+    #wait_until_color_is()
     # wait_until_color_is_one_of()
-    # beeping_based_camera()
+    camera()
     # beep_for_top_red_button()
     # black_line()
 
@@ -125,13 +124,9 @@ def camera():
 
         area = width * height
 
-        #if area > 1000:
-            #print("I SEE THE OBJECT")
-            #ev3.Sound.beep()
+        if area > 700:
+            ev3.Sound.beep()
 
-        #if robot.touch_sensor.is_pressed():
-            #rint('COMPLETED')
-            #break
 
 
 def beep_for_top_red_button():
